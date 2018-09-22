@@ -12,16 +12,13 @@
     background-color: lightblue;
     min-height: 100%;
     position: relative;
-    margin-left:0px;
-    -webkit-transition: margin-left 0.2s; /* For Safari 3.1 to 6.0 */
-    transition: margin-left 0.2s;
 }
 #sidebar.active{
     margin-left: -200px;
 }
 </style>
 <template>
-    <div id="sidebar"  v-bind:class="{ active: this.$store.state.sidebaractive}">
+    <div id="sidebar">
         <div>
             <router-link to="/">Home</router-link>
         </div>

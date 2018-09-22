@@ -1,12 +1,14 @@
 <template>
   <div id="app">
   <div id = "top">
-    testing
+     <b-button @click="mouseClick" variant="primary">
+                Do your Thing
+            </b-button>
   </div>
-    <div id="leftCol">
+    <div id="leftCol" v-bind:class="{ active: this.$store.state.sidebaractive}">
           <sidebar></sidebar>
     </div>
-    <div id="content"> 
+    <div id="content"  v-bind:class="{ active: this.$store.state.sidebaractive}"> 
         <router-view/>
     </div>
   </div>
@@ -17,22 +19,21 @@ export default {
   components: {
     Sidebar
   },
-  data() {
-    return {
-      margin: 200
-    };
-  },
   mounted: function() {
-    
-  }
+
+  },
+     methods: {
+        mouseClick: function(){
+          console.log("yas")
+            this.$store.state.sidebaractive =  !this.$store.state.sidebaractive 
+        },
+    }
 };
 </script>
 <style>
+
 .app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
-}
-#nav {
-  padding: 30px;
 }
 #top {
   position: fixed;
@@ -52,6 +53,8 @@ export default {
   color: #42b983;
 }
 #leftCol {
+  /* No idea Why we need to set in negetive. There is no padding. It makes no sense.  */
+  margin-left:-8px; 
   margin-top: 40px;
   position: fixed;
   width: 200px;
@@ -66,5 +69,19 @@ export default {
   margin-top: 40px;
   position: relative;
   margin-left: 200px;
+  -webkit-transition: margin-left 0.2s; /* For Safari 3.1 to 6.0 */
+  transition: margin-left 0.2s;
+}
+
+#content.active{
+    margin-left: 0px;
+}
+#leftCol{
+    margin-left:0px;
+    -webkit-transition: margin-left 0.2s; /* For Safari 3.1 to 6.0 */
+    transition: margin-left 0.2s;
+}
+#leftCol.active{
+    margin-left: -200px;
 }
 </style>
